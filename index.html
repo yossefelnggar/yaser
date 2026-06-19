@@ -326,7 +326,6 @@
 <body>
     <!-- Control Panel -->
     <div class="control-panel">
-        <!-- زر المشاركة الجديد -->
         <button class="toggle-btn" id="shareToggle" title="مشاركة / Share">
             <i class="fas fa-share-alt"></i>
         </button>
@@ -366,8 +365,8 @@
 
             <!-- Contact Links -->
             <div class="contact-links">
-                <!-- WhatsApp (معدل لفتح الشات مباشرة برقم الهاتف والكود الدولي لمصر) -->
-                <a href="https://wa.me/201117207826" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                <!-- WhatsApp (الرقم الجديد) -->
+                <a href="https://wa.me/201149805962" class="contact-btn" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i>
                     <div class="contact-text">
                         <span class="contact-label ar-text">واتساب</span>
@@ -385,6 +384,16 @@
                         <span class="contact-label en-text hidden">Facebook</span>
                         <span class="contact-value ar-text">متابعة الملف</span>
                         <span class="contact-value en-text hidden">Follow profile</span>
+                    </div>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@ahmed86474?_r=1&_d=f0m9galdj566le&sec_uid=MS4wLjABAAAARbmIvl0pi_-ei_qM3tybgT553HAwi0X4OFY6tWblEEtnUYEzzQVAva2uvnQ3Udsd&share_author_id=6998575600126952454&sharer_language=ar&source=h5_m&u_code=dk84c7hfe9m6fm&timestamp=1781881573&user_id=6998575600126952454&sec_user_id=MS4wLjABAAAARbmIvl0pi_-ei_qM3tybgT553HAwi0X4OFY6tWblEEtnUYEzzQVAva2uvnQ3Udsd&item_author_type=1&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7651926811983251201&share_link_id=c1a2c78c-a885-4717-aebb-87efaa21baad&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb4907&social_share_type=5&share_enter_from=settings_page&item_author_type=1&enable_checksum=1" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-tiktok"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">تيك توك</span>
+                        <span class="contact-label en-text hidden">TikTok</span>
+                        <span class="contact-value">@ahmed86474</span>
                     </div>
                 </a>
 
@@ -411,12 +420,12 @@
                 </a>
 
                 <!-- Phone -->
-                <a href="tel:01117207826" class="contact-btn">
+                <a href="tel:01149805962" class="contact-btn">
                     <i class="fas fa-phone-alt"></i>
                     <div class="contact-text">
                         <span class="contact-label ar-text">الهاتف</span>
                         <span class="contact-label en-text hidden">Phone</span>
-                        <span class="contact-value">01117207826</span>
+                        <span class="contact-value">01149805962</span>
                     </div>
                 </a>
             </div>
@@ -480,7 +489,6 @@
             setLanguage(newLang);
         });
 
-        // كود تفعيل خاصية المشاركة الذكية الذاتية
         shareToggle.addEventListener('click', async () => {
             const isEn = html.lang === 'en';
             const shareTitle = isEn ? 'Yasser Sanad - Profile' : 'ياسر سند - الملف الشخصي';
