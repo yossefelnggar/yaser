@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ياسر مرسي سند</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0f172a;
+            --card-bg: #1a2332;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --border-color: #2d3748;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body.light-mode {
+            --dark-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --accent: #059669;
+            --accent-light: #10b981;
+            --border-color: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a2f45 50%, #0f2818 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #f5f7fa 0%, #f1f5f9 50%, #eef5f0 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .toggle-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        html[dir="ltr"] .control-panel {
+            right: auto;
+            left: 24px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 24px;
+            padding: 48px 36px;
+            box-shadow: 0 20px 60px var(--shadow);
+            animation: slideIn 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 32px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2.5px solid var(--accent);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25);
+            animation: fadeIn 0.7s ease 0.1s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .profile-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            animation: fadeIn 0.7s ease 0.2s both;
+        }
+
+        .profile-college {
+            font-size: 13px;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 4px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            animation: fadeIn 0.7s ease 0.25s both;
+            text-transform: uppercase;
+        }
+
+        .profile-department {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3px;
+            font-weight: 500;
+            animation: fadeIn 0.7s ease 0.3s both;
+        }
+
+        .profile-specialization {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 28px;
+            font-weight: 500;
+            opacity: 0.85;
+            animation: fadeIn 0.7s ease 0.35s both;
+        }
+
+        .divider {
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 28px 0;
+            animation: fadeIn 0.7s ease 0.4s both;
+            opacity: 0.6;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            animation: fadeIn 0.7s ease 0.45s both;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--accent);
+            transform: translateX(-4px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+        }
+
+        .contact-btn i {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .contact-btn:hover i {
+            transform: scale(1.15);
+        }
+
+        .contact-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contact-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.75;
+            font-weight: 600;
+        }
+
+        .contact-value {
+            font-size: 13px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 36px 24px;
+                border-radius: 20px;
+            }
+
+            .profile-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-name {
+                font-size: 24px;
+            }
+
+            .profile-college {
+                font-size: 12px;
+            }
+
+            .profile-department {
+                font-size: 11px;
+            }
+
+            .profile-specialization {
+                font-size: 10px;
+            }
+
+            .contact-btn {
+                padding: 12px 14px;
+                font-size: 12px;
+            }
+
+            .contact-label {
+                font-size: 9px;
+            }
+
+            .control-panel {
+                top: 16px;
+                right: 16px;
+                gap: 8px;
+            }
+
+            html[dir="ltr"] .control-panel {
+                right: auto;
+                left: 16px;
+            }
+
+            .toggle-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <button class="toggle-btn" id="themeToggle" title="Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button class="toggle-btn" id="langToggle" title="العربية/English">
+            <span style="font-size: 14px; font-weight: 700;">ع</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="profile-card">
+            <!-- Profile Image -->
+            <div class="profile-image">
+                <img src="yaser.jpeg" alt="ياسر مرسي سند">
+            </div>
+
+            <!-- Name -->
+            <h1 class="profile-name ar-text">ياسر سند</h1>
+            <h1 class="profile-name en-text hidden">Yasser Sanad</h1>
+
+            <!-- College -->
+            <p class="profile-college ar-text">كلية الهندسة</p>
+            <p class="profile-college en-text hidden">Faculty of Engineering</p>
+
+            <!-- Department -->
+            <p class="profile-department ar-text">قسم تكنولوجيا الصناعة والطاقة</p>
+            <p class="profile-department en-text hidden">Industrial & Energy Technology</p>
+
+            <!-- Specialization -->
+            <p class="profile-specialization ar-text">+ تخصص تكنولوجيا زراعية</p>
+            <p class="profile-specialization en-text hidden">+ Agricultural Technology</p>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Contact Links -->
+            <div class="contact-links">
+                <!-- WhatsApp -->
+                <a href="https://wa.me/qr/62YENN5U7U67N1" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">واتساب</span>
+                        <span class="contact-label en-text hidden">WhatsApp</span>
+                        <span class="contact-value ar-text">تواصل معي</span>
+                        <span class="contact-value en-text hidden">Connect with me</span>
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1Awvk587on/" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">فيسبوك</span>
+                        <span class="contact-label en-text hidden">Facebook</span>
+                        <span class="contact-value ar-text">متابعة الملف</span>
+                        <span class="contact-value en-text hidden">Follow profile</span>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/yasser_morsi_sanad_morsi?utm_source=qr&igsh=MXIyOTdidXJhd3R4dA==" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">انستاجرام</span>
+                        <span class="contact-label en-text hidden">Instagram</span>
+                        <span class="contact-value ar-text">@yasser_morsi_sanad</span>
+                        <span class="contact-value en-text hidden">@yasser_morsi_sanad</span>
+                    </div>
+                </a>
+
+                <!-- Telegram -->
+                <a href="https://t.me/+201149805962" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-telegram"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">تليجرام</span>
+                        <span class="contact-label en-text hidden">Telegram</span>
+                        <span class="contact-value ar-text">راسلني مباشرة</span>
+                        <span class="contact-value en-text hidden">Message me</span>
+                    </div>
+                </a>
+
+                <!-- Phone -->
+                <a href="tel:01117207826" class="contact-btn">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="contact-text">
+                        <span class="contact-label ar-text">الهاتف</span>
+                        <span class="contact-label en-text hidden">Phone</span>
+                        <span class="contact-value">01117207826</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const html = document.documentElement;
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        const langToggle = document.getElementById('langToggle');
+        const arTexts = document.querySelectorAll('.ar-text');
+        const enTexts = document.querySelectorAll('.en-text');
+
+        function init() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedLang = localStorage.getItem('language') || 'ar';
+            
+            setTheme(savedTheme);
+            setLanguage(savedLang);
+        }
+
+        function setTheme(theme) {
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                body.classList.remove('light-mode');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                arTexts.forEach(el => el.classList.add('hidden'));
+                enTexts.forEach(el => el.classList.remove('hidden'));
+                langToggle.innerHTML = 'EN';
+            } else {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                arTexts.forEach(el => el.classList.remove('hidden'));
+                enTexts.forEach(el => el.classList.add('hidden'));
+                langToggle.innerHTML = '<span style="font-size: 14px; font-weight: 700;">ع</span>';
+            }
+            localStorage.setItem('language', lang);
+        }
+
+        langToggle.addEventListener('click', () => {
+            const currentLang = html.lang;
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            setLanguage(newLang);
+        });
+
+        init();
+    </script>
+</body>
+</html>
