@@ -326,6 +326,10 @@
 <body>
     <!-- Control Panel -->
     <div class="control-panel">
+        <!-- زر المشاركة الجديد -->
+        <button class="toggle-btn" id="shareToggle" title="مشاركة / Share">
+            <i class="fas fa-share-alt"></i>
+        </button>
         <button class="toggle-btn" id="themeToggle" title="Dark/Light Mode">
             <i class="fas fa-moon"></i>
         </button>
@@ -346,15 +350,15 @@
             <h1 class="profile-name en-text hidden">Yasser Sanad</h1>
 
             <!-- College -->
-            <p class="profile-college ar-text">كلية الهندسة</p>
-            <p class="profile-college en-text hidden">Faculty of Engineering</p>
+            <p class="profile-college ar-text">كلية التكنولوجيا الصناعة والطاقة</p>
+            <p class="profile-college en-text hidden">Faculty of Industry & Energy Technology</p>
 
             <!-- Department -->
-            <p class="profile-department ar-text">قسم تكنولوجيا الصناعة والطاقة</p>
-            <p class="profile-department en-text hidden">Industrial & Energy Technology</p>
+            <p class="profile-department ar-text">قسم ميكنه زراعيه</p>
+            <p class="profile-department en-text hidden">Agricultural Mechanization Dept.</p>
 
             <!-- Specialization -->
-            <p class="profile-specialization ar-text">+ تخصص تكنولوجيا زراعية</p>
+            <p class="profile-specialization ar-text">+ تخصص هندسة زراعية</p>
             <p class="profile-specialization en-text hidden">+ Agricultural Technology</p>
 
             <!-- Divider -->
@@ -362,14 +366,14 @@
 
             <!-- Contact Links -->
             <div class="contact-links">
-                <!-- WhatsApp -->
-                <a href="https://wa.me/qr/62YENN5U7U67N1" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                <!-- WhatsApp (معدل لفتح الشات مباشرة برقم الهاتف والكود الدولي لمصر) -->
+                <a href="https://wa.me/201117207826" class="contact-btn" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i>
                     <div class="contact-text">
                         <span class="contact-label ar-text">واتساب</span>
                         <span class="contact-label en-text hidden">WhatsApp</span>
-                        <span class="contact-value ar-text">تواصل معي</span>
-                        <span class="contact-value en-text hidden">Connect with me</span>
+                        <span class="contact-value ar-text">تواصل معي مباشرة</span>
+                        <span class="contact-value en-text hidden">Chat with me</span>
                     </div>
                 </a>
 
@@ -424,6 +428,7 @@
         const body = document.body;
         const themeToggle = document.getElementById('themeToggle');
         const langToggle = document.getElementById('langToggle');
+        const shareToggle = document.getElementById('shareToggle');
         const arTexts = document.querySelectorAll('.ar-text');
         const enTexts = document.querySelectorAll('.en-text');
 
@@ -473,6 +478,35 @@
             const currentLang = html.lang;
             const newLang = currentLang === 'ar' ? 'en' : 'ar';
             setLanguage(newLang);
+        });
+
+        // كود تفعيل خاصية المشاركة الذكية الذاتية
+        shareToggle.addEventListener('click', async () => {
+            const isEn = html.lang === 'en';
+            const shareTitle = isEn ? 'Yasser Sanad - Profile' : 'ياسر سند - الملف الشخصي';
+            const shareText = isEn 
+                ? 'Check out Yasser Sanad\'s digital business card.' 
+                : 'اطلع على بطاقة العمل الرقمية الخاصة بالمهندس ياسر سند.';
+            const shareUrl = window.location.href;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: shareTitle,
+                        text: shareText,
+                        url: shareUrl
+                    });
+                } catch (err) {
+                    console.log('Cancelled or error:', err);
+                }
+            } else {
+                try {
+                    await navigator.clipboard.writeText(shareUrl);
+                    alert(isEn ? 'Link copied to clipboard!' : 'تم نسخ رابط الملف الشخصي بنجاح!');
+                } catch (err) {
+                    alert(isEn ? 'Could not copy link' : 'عذراً، تعذر نسخ الرابط');
+                }
+            }
         });
 
         init();
